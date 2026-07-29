@@ -2,7 +2,7 @@
   @title       又一像素气泡 大果版（yoyi-pixel-bubble-areca-nut）
   @author      周姓吴先生
   @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴，Zpix 中英像素字体，支持 [dark] 深色主题
-  @version     1.0.0
+  @version     1.1.0
   @updated     July 29, 2026
   @features    dark-mode
 */
@@ -25,22 +25,27 @@
   /* ==================== 配色与素材定义 ==================== */
 
   .event--message {
-    /* 气泡：白底 + 深灰像素描边（NES.css Balloon 经典配色） */
+    /* 气泡：白底 + 粉色像素描边（又一直播间配色） */
     --bubble-bg: #ffffff;
-    --bubble-border: #212529;
+    --bubble-border: #ec6a9e;
     /* 像素阶梯角环形描边（8×8 SVG，颜色写在 fill 里，换色=换整张图） */
-    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(33,37,41)" /></svg>');
+    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(236,106,158)" /></svg>');
 
     /* 文字 */
     --event-message-text: #212529;
     --event-danmaku-text: #212529;
     --event-reply-text: #868e96;
 
-    /* 用户名：默认 / 总督 / 提督 / 舰长 */
-    --event-username-text-0: #e8890c;
-    --event-username-text-1: #e03131;
-    --event-username-text-2: #9c36b5;
-    --event-username-text-3: #1971c2;
+    /* 用户名描边色（浅色主题用白描边，保证浅背景可读） */
+    --username-stroke: #ffffff;
+    /* 用户名描边宽度（调粗细就改这一个值，建议 0.5~2px） */
+    --username-stroke-width: 1px;
+
+    /* 用户名：默认粉 / 总督橙（头发色） / 提督紫 / 舰长蓝（又一配色） */
+    --event-username-text-0: #d64f8d;
+    --event-username-text-1: #d97a10;
+    --event-username-text-2: #8a63d2;
+    --event-username-text-3: #2f8fd0;
 
     /* 正文背景交给气泡自己画，关掉平台底色 */
     --event-danmaku-bg-0: transparent;
@@ -72,24 +77,27 @@
     --event-danmaku-text: #f8f9fa;
     --event-reply-text: #adb5bd;
 
-    --event-username-text-0: #ffd166;
-    --event-username-text-1: #ff6b6b;
-    --event-username-text-2: #c792ea;
-    --event-username-text-3: #5aa9ff;
+    /* 用户名描边色（深色主题用深灰描边） */
+    --username-stroke: #212529;
+
+    --event-username-text-0: #ff9ec7;
+    --event-username-text-1: #ffb84d;
+    --event-username-text-2: #c4a7ff;
+    --event-username-text-3: #7ec8f0;
   }
 
-  /* 大航海：气泡描边换色（底色不变），总督红/提督紫/舰长蓝 */
+  /* 大航海：气泡描边换色（底色不变），总督金/提督紫/舰长蓝（又一配色） */
   .event--message.guard-level--1 {
-    --bubble-border: #e03131;
-    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(224,49,49)" /></svg>');
+    --bubble-border: #ef8f23;
+    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(239,143,35)" /></svg>');
   }
   .event--message.guard-level--2 {
-    --bubble-border: #9c36b5;
-    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(156,54,181)" /></svg>');
+    --bubble-border: #9b7ede;
+    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(155,126,222)" /></svg>');
   }
   .event--message.guard-level--3 {
-    --bubble-border: #1971c2;
-    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(25,113,194)" /></svg>');
+    --bubble-border: #45a8e0;
+    --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(69,168,224)" /></svg>');
   }
 
   /* 大航海身份徽章：图标+文字的胶囊样式
@@ -166,15 +174,15 @@
     bottom: 10px;                    /* 头像底边≈尾巴尖的高度（气泡底边在 30px 处） */
     width: var(--avatar-size);
     height: var(--avatar-size);
-    margin: 4px;                     /* 给浮在外面的描边留位 */
+    margin: 8px;                     /* 给浮在外面的描边留位 */
     background: #fff;
 
     border-style: solid;
-    border-width: 3px;
+    border-width: 4px;
     border-color: transparent;
     border-image-slice: 3;
-    border-image-width: 2;           /* 比气泡细一档，适配小尺寸 */
-    border-image-outset: 1;
+    border-image-width: 3;           /* 与气泡同规格 */
+    border-image-outset: 2;
     border-image-repeat: stretch;
     border-image-source: var(--bubble-ring);
 
@@ -209,10 +217,16 @@
   .event--message .meta {
     margin-bottom: calc(var(--1px) * 2);  /* 名字与气泡的可见间距 */
   }
-  /* 用户名硬阴影（已加 padding 防剪裁） */
+  /* 用户名：四向描边式阴影，保证浅色/复杂背景下的可读性
+     （粗细调 --username-stroke-width，颜色调 --username-stroke，都在文件顶部变量区） */
   .event--message .username-text {
-    padding: 0 calc(var(--1px) * 1);
-    text-shadow: calc(var(--1px) * 2) calc(var(--1px) * 2) 0 rgba(0, 0, 0, 0.2);
+    padding: calc(var(--1px) * 2);
+    text-shadow:
+      calc(var(--username-stroke-width) * -1) calc(var(--username-stroke-width) * -1) 0 var(--username-stroke),
+      var(--username-stroke-width) calc(var(--username-stroke-width) * -1) 0 var(--username-stroke),
+      calc(var(--username-stroke-width) * -1) var(--username-stroke-width) 0 var(--username-stroke),
+      var(--username-stroke-width) var(--username-stroke-width) 0 var(--username-stroke),
+      0 calc(var(--1px) * 3) 0 rgba(0, 0, 0, 0.25);
   }
 
   /* ==================== 气泡本体（NES.css Balloon 移植） ==================== */
