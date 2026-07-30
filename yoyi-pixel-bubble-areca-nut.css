@@ -1,8 +1,8 @@
 /*
   @title       又一像素气泡 大果版（yoyi-pixel-bubble-areca-nut）
   @author      周姓吴先生
-  @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴，Fusion Pixel 多语言像素字体，支持 [dark] 深色主题
-  @version     1.2.0
+  @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴 + 闪电装饰，Fusion Pixel 多语言像素字体，支持 [dark] 深色主题
+  @version     1.3.0
   @updated     July 30, 2026
   @features    dark-mode
 */
@@ -35,79 +35,63 @@
 }
 
 @layer remote-css {
-
-  /* OBS 浏览器源未加载完时避免白底 */
   body { background-color: rgba(0, 0, 0, 0); }
 
-  /* ==================== 配色与素材定义 ==================== */
-
   .event--message {
-    /* 气泡：白底 + 粉色像素描边（又一直播间配色） */
     --bubble-bg: #ffffff;
     --bubble-border: #ec6a9e;
-    /* 像素阶梯角环形描边（8×8 SVG，颜色写在 fill 里，换色=换整张图） */
     --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(236,106,158)" /></svg>');
 
-    /* 文字 */
     --event-message-text: #212529;
     --event-danmaku-text: #212529;
     --event-reply-text: #868e96;
-
-    /* 用户名描边色（浅色主题用白描边，保证浅背景可读） */
     --username-stroke: #ffffff;
-    /* 用户名描边宽度（调粗细就改这一个值，建议 0.5~2px） */
     --username-stroke-width: 1px;
 
-    /* 用户名：默认粉 / 总督橙（头发色） / 提督紫 / 舰长蓝（又一配色） */
     --event-username-text-0: #d64f8d;
     --event-username-text-1: #d97a10;
     --event-username-text-2: #8a63d2;
     --event-username-text-3: #2f8fd0;
 
-    /* 正文背景交给气泡自己画，关掉平台底色 */
     --event-danmaku-bg-0: transparent;
     --event-danmaku-bg-1: transparent;
     --event-danmaku-bg-2: transparent;
     --event-danmaku-bg-3: transparent;
 
-    /* 头像尺寸 */
     --avatar-size: 83px;
-    /* 头像与气泡之间的间距（调它就改这一个值，按预览实测微调） */
     --avatar-gap: 20px;
-    /* 头像垂直位置（bottom 偏移：调小/负数 → 头像下移；调大 → 上移） */
     --avatar-bottom: 5px;
 
-    /* 大航海胶囊里槟榔图标的大小（胶囊高度不变，图标越大越饱满） */
+    /* 气泡右上角闪电装饰 */
+    --flash-size: 120px;        /* 闪电大小 */
+    --flash-rotate: 0deg;      /* 旋转角度（正数顺时针） */
+    --flash-right: -30px;      /* 水平位置（相对事件右缘；负数 → 向右探出气泡） */
+    --flash-top: -10px;         /* 垂直位置（相对事件顶部；负数 → 更靠上） */
+    /* 第一行文字给闪电让位的宽度（压字时调大，如 28px；不压保持 0） */
+    --flash-text-space: 0px;
+
     --guard-nut-size: 32px;
-    /* 槟榔图标的旋转角度（正数顺时针，负数逆时针，单位 deg） */
     --guard-nut-rotate: -15deg;
   }
 
-  /* 关闭平台的大航海头像装饰框（.avatar-frame 是独立元素，直接隐藏） */
   .event .avatar-frame {
     display: none;
   }
 
-  /* 深色主题（OBS 场景名加 [dark] 生效）：深灰底 + 白描边 */
   [data-theme='dark'] .event--message {
     --bubble-bg: #212529;
     --bubble-border: #ffffff;
     --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(255,255,255)" /></svg>');
-
     --event-message-text: #f8f9fa;
     --event-danmaku-text: #f8f9fa;
     --event-reply-text: #adb5bd;
-
-    /* 用户名描边色（深色主题用深灰描边） */
     --username-stroke: #212529;
-
     --event-username-text-0: #ff9ec7;
     --event-username-text-1: #ffb84d;
     --event-username-text-2: #c4a7ff;
     --event-username-text-3: #7ec8f0;
   }
 
-  /* 大航海：气泡描边换色（底色不变），总督金/提督紫/舰长蓝（又一配色） */
   .event--message.guard-level--1 {
     --bubble-border: #ef8f23;
     --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(239,143,35)" /></svg>');
@@ -121,8 +105,6 @@
     --bubble-ring: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="8" height="8" xmlns="http://www.w3.org/2000/svg"><path d="M3 1 h1 v1 h-1 z M4 1 h1 v1 h-1 z M2 2 h1 v1 h-1 z M5 2 h1 v1 h-1 z M1 3 h1 v1 h-1 z M6 3 h1 v1 h-1 z M1 4 h1 v1 h-1 z M6 4 h1 v1 h-1 z M2 5 h1 v1 h-1 z M5 5 h1 v1 h-1 z M3 6 h1 v1 h-1 z M4 6 h1 v1 h-1 z" fill="rgb(69,168,224)" /></svg>');
   }
 
-  /* 大航海身份徽章：图标+文字的胶囊样式
-     底色吃 --bubble-border，舰长蓝/提督紫/总督红自动和气泡描边一致 */
   .event--message .guard-badge {
     display: inline-flex;
     align-items: center;
@@ -132,17 +114,16 @@
     padding: calc(var(--1px) * 2) calc(var(--1px) * 6)
              calc(var(--1px) * 2) calc(var(--1px) * 2);
     background-color: var(--bubble-border);
-    background-image: none;          /* 盖掉官方图标的背景式实现 */
-    border-radius: 999px;            /* 胶囊圆角 */
+    background-image: none;
+    border-radius: 999px;
     box-shadow: calc(var(--1px) * 2) calc(var(--1px) * 2) 0 rgba(0, 0, 0, 0.18);
     vertical-align: middle;
   }
-  /* 藏掉原始图标（img 或 svg 实现都覆盖） */
+
   .event--message .guard-badge > * {
     display: none;
   }
-  /* 胶囊左侧：槟榔图标（负边距抵消高度，胶囊不变大）
-     大小调 --guard-nut-size、角度调 --guard-nut-rotate（文件顶部变量区） */
+
   .event--message .guard-badge::before {
     content: '';
     width: var(--guard-nut-size);
@@ -152,7 +133,7 @@
     background: var(--guard-nut) center / contain no-repeat;
     image-rendering: pixelated;
   }
-  /* 胶囊右侧：身份文字 */
+
   .event--message .guard-badge::after {
     color: #fff;
     font-size: 0.7em;
@@ -160,34 +141,36 @@
     line-height: 1;
     text-shadow: none;
   }
-  /* 使用仓库内素材，避免暴露或依赖第三方对象存储地址。 */
-  .event--message.guard-level--3 .guard-badge { --guard-nut: url('assets/gold-areca-nut.png'); }
-  .event--message.guard-level--2 .guard-badge { --guard-nut: url('assets/silver-areca-nut.png'); }
-  .event--message.guard-level--1 .guard-badge { --guard-nut: url('assets/bronze-areca-nut.png'); }
+
+  /* 使用仓库内素材，避免暴露或依赖个人对象存储地址。 */
+  .event--message.guard-level--3 .guard-badge {
+    --guard-nut: url('assets/gold-areca-nut.png');
+  }
+  .event--message.guard-level--2 .guard-badge {
+    --guard-nut: url('assets/silver-areca-nut.png');
+  }
+  .event--message.guard-level--1 .guard-badge {
+    --guard-nut: url('assets/bronze-areca-nut.png');
+  }
+
   .event--message.guard-level--3 .guard-badge::after { content: '舰长'; }
   .event--message.guard-level--2 .guard-badge::after { content: '提督'; }
   .event--message.guard-level--1 .guard-badge::after { content: '总督'; }
-  /* 图标对应：舰长=金 / 提督=银 / 总督=铜（按槟榔配色而非等级贵贱） */
-  /* 粉丝牌里的大航海图标（如果显示）保持原样，不做胶囊化 */
+
   .event--message .fans-medal .guard-badge {
     all: revert-layer;
   }
-
-  /* ==================== 事件布局：头像左列，名字压气泡上方 ====================
-     注意：需要在配置器中开启「显示头像」，否则左侧会留白
-     （留白来自下面的 padding-left，不显示头像时把它删掉即可） */
 
   .event--message {
     position: relative;
     display: block;
     margin: calc(var(--1px) * 6) 0;
-    padding-left: calc(var(--avatar-size) + var(--avatar-gap));  /* 让出头像列 */
-    min-height: calc(var(--avatar-size) + 34px);    /* 容纳底部锚定的头像 */
+    padding-left: calc(var(--avatar-size) + var(--avatar-gap));
+    min-height: calc(var(--avatar-size) + 34px);
     font-family: 'Fusion Pixel Hans', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
     --event-font-family: 'Fusion Pixel Hans', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
   }
 
-  /* 页面或消息带 lang 时，切换对应的地区字形。 */
   :lang(zh-Hant) .event--message,
   :lang(zh-TW) .event--message,
   :lang(zh-HK) .event--message,
@@ -197,70 +180,88 @@
     font-family: 'Fusion Pixel Hant', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
     --event-font-family: 'Fusion Pixel Hant', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
   }
+
   :lang(ja) .event--message,
   .event--message :lang(ja) {
     font-family: 'Fusion Pixel Japanese', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
     --event-font-family: 'Fusion Pixel Japanese', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
   }
+
   :lang(ko) .event--message,
   .event--message :lang(ko) {
     font-family: 'Fusion Pixel Korean', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
     --event-font-family: 'Fusion Pixel Korean', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
   }
 
-  /* 头像：锚定在事件【底部】，与气泡底边/尾巴始终同水平线
-     （长弹幕把气泡向下撑开时，头像跟着尾巴走，不错位） */
   .event--message .avatar-wrap {
     position: absolute;
     left: 0;
-    bottom: var(--avatar-bottom);    /* 垂直位置调文件顶部的 --avatar-bottom */
+    bottom: var(--avatar-bottom);
     width: var(--avatar-size);
     height: var(--avatar-size);
-    margin: 8px;                     /* 给浮在外面的描边留位 */
+    margin: 8px;
     background: #fff;
-
     border-style: solid;
     border-width: 4px;
     border-color: transparent;
     border-image-slice: 3;
-    border-image-width: 3;           /* 与气泡同规格 */
+    border-image-width: 3;
     border-image-outset: 2;
     border-image-repeat: stretch;
     border-image-source: var(--bubble-ring);
-
     filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.18));
   }
+
   .event--message .avatar {
     width: 100%;
     height: 100%;
   }
 
-  /* 引用回复里的头像：整层回滚本皮肤的所有改动，
-     精确恢复到「未应用自定义 CSS」时的平台原样（尺寸/位置/圆角都还原） */
   .event--message .message .avatar-wrap,
   .event--message .message .avatar {
     all: revert-layer;
   }
-  /* --avatar-size 是自定义变量，all 管不到，单独回滚
-     （否则引用头像会吃主头像放大的尺寸） */
+
   .event--message .message {
     --avatar-size: revert-layer;
   }
 
-  /* 用户名：在气泡正上方，与气泡左缘对齐 */
   .event--message .username-wrap {
     display: block;
     margin-left: 16px;
     font-weight: 700;
     line-height: 1.3;
   }
-  /* 名字与气泡的间距：作用在 .meta（用户名区域的容器）上，
-     username-wrap 的 margin 只在容器内部生效，推不动气泡 */
+
   .event--message .meta {
-    margin-bottom: calc(var(--1px) * 2);  /* 名字与气泡的可见间距 */
+    margin-bottom: calc(var(--1px) * 2);
   }
-  /* 用户名：四向描边式阴影，保证浅色/复杂背景下的可读性
-     （粗细调 --username-stroke-width，颜色调 --username-stroke，都在文件顶部变量区） */
+
+  /* ==================== 气泡右上角闪电装饰 ====================
+     锚在事件容器（.event--message）右上角——不要锚 .meta：
+     平台自己控制 .meta 的定位，覆盖它的 position 会让参照系整个错位。
+     事件右缘≈气泡右缘；事件顶部是用户名行，气泡顶在其下约一行，
+     垂直位置用 --flash-top 微调（改了弹幕字号可能要重调）。
+     平台的 .event-list 带边缘遮罩，会裁掉探出气泡的装饰，需关闭 */
+  .event--message::after {
+    content: '';
+    position: absolute;
+    z-index: 4;
+    right: var(--flash-right);
+    top: var(--flash-top);
+    width: var(--flash-size);
+    height: var(--flash-size);
+    background: url('assets/blue-flash.png') center / contain no-repeat;
+    transform: rotate(var(--flash-rotate));
+    image-rendering: pixelated;
+    filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.18));
+    pointer-events: none;
+  }
+  .event-list {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
   .event--message .username-text {
     padding: calc(var(--1px) * 2);
     text-shadow:
@@ -271,22 +272,17 @@
       0 calc(var(--1px) * 3) 0 rgba(0, 0, 0, 0.25);
   }
 
-  /* ==================== 气泡本体（NES.css Balloon 移植） ==================== */
-
   .event--message .message {
     position: relative;
     display: block;
     box-sizing: border-box;
-    width: calc(100% - 8px);         /* 气泡恒占满整行（扣除两侧 4px 边距），
-                                        弹幕长短只影响气泡高度 */
-    padding: calc(var(--1px) * 6) calc(var(--1px) * 9);
-    margin: 4px;            /* 给浮在外面的描边留位 */
-    margin-bottom: 30px;    /* 给尾巴留位 */
-
+    width: calc(100% - 8px);
+    padding: calc(var(--1px) * 6) calc(var(--1px) * 9 + var(--flash-text-space))
+             calc(var(--1px) * 6) calc(var(--1px) * 9);
+    margin: 4px;
+    margin-bottom: 30px;
     background-color: var(--bubble-bg);
     color: var(--event-danmaku-text);
-
-    /* 像素阶梯角描边：环形 SVG 切片，浮在气泡外 2 格 */
     border-style: solid;
     border-width: 4px;
     border-color: transparent;
@@ -295,22 +291,17 @@
     border-image-outset: 2;
     border-image-repeat: stretch;
     border-image-source: var(--bubble-ring);
-
-    /* 灰色偏移投影（跟随像素轮廓，含尾巴） */
     filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.18));
   }
 
-  /* 旧 WebKit 内核兼容（照抄 NES.css 的兜底） */
   @media not all and (min-resolution: .001dpcm) {
     .event--message .message { border-image-repeat: space; }
   }
+
   @supports (-moz-appearance: meterbar) {
     .event--message .message { border-image-repeat: stretch; }
   }
 
-  /* ==================== 像素尾巴（左下，双伪元素） ==================== */
-
-  /* 尾巴侧壁 */
   .event--message .message::before {
     content: '';
     position: absolute;
@@ -323,7 +314,6 @@
     border-left: 4px solid var(--bubble-border);
   }
 
-  /* 尾巴阶梯尖端（box-shadow 逐像素绘制，颜色吃变量） */
   .event--message .message::after {
     content: '';
     position: absolute;
@@ -344,37 +334,32 @@
       -8px 8px;
   }
 
-  /* 深色主题：描边与底色之间用底色垫一层，尾巴同步换色 */
   [data-theme='dark'] .event--message .message {
     box-shadow: 0 0 0 8px var(--bubble-bg);
   }
+
   [data-theme='dark'] .event--message .message::before {
     box-shadow: -5px 10px 0 6px var(--bubble-bg);
   }
 
-  /* ==================== 头像与表情 ==================== */
-
   .event--message .avatar {
-    border-radius: 0;                 /* 方头像更像素 */
+    border-radius: 0;
     image-rendering: pixelated;
   }
+
   .event--message .emote--large {
     image-rendering: pixelated;
   }
 
-  /* ==================== 入场动画（左侧插入，过冲回弹） ====================
-     cubic-bezier 第二参数 >1 产生过冲：滑入后超出终点再弹回，
-     像消息「咔」地插进列表；will-change 避免 drop-shadow 滤镜掉帧 */
   .can-motion .event--message {
     animation: pixel-slide-in 0.7s cubic-bezier(0.22, 1.6, 0.36, 1) both;
     will-change: transform;
   }
+
   @keyframes pixel-slide-in {
     from { transform: translateX(-16px); }
-    to   { transform: translateX(0); }
+    to { transform: translateX(0); }
   }
-
-  /* ==================== 窄屏自适应 ==================== */
 
   @container main (max-width: 300px) {
     .event--message .message {
@@ -382,7 +367,6 @@
     }
   }
 
-  /* 控制台已读标记 */
   .event--message.read {
     opacity: 0.45;
   }

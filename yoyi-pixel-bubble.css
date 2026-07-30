@@ -1,8 +1,8 @@
 /*
   @title       又一像素气泡（yoyi-pixel-bubble）
   @author      周姓吴先生
-  @description NES 风像素气泡弹幕皮肤：阶梯角气泡 + 像素尾巴，Fusion Pixel 多语言像素字体，大航海三色描边，支持 [dark] 深色主题与场景联动
-  @version     1.2.0
+  @description NES 风像素气泡弹幕皮肤：阶梯角气泡 + 像素尾巴 + 闪电装饰，Fusion Pixel 多语言像素字体，大航海三色描边，支持 [dark] 深色主题与场景联动
+  @version     1.3.0
   @updated     July 30, 2026
   @features    dark-mode
 */
@@ -76,6 +76,14 @@
     --avatar-gap: 20px;
     /* 头像垂直位置（bottom 偏移：调小/负数 → 头像下移；调大 → 上移） */
     --avatar-bottom: 5px;
+
+    /* 气泡右上角闪电装饰 */
+    --flash-size: 120px;        /* 闪电大小 */
+    --flash-rotate: 0deg;      /* 旋转角度（正数顺时针） */
+    --flash-right: -30px;      /* 水平位置（相对事件右缘；负数 → 向右探出气泡） */
+    --flash-top: -10px;         /* 垂直位置（相对事件顶部；负数 → 更靠上） */
+    /* 第一行文字给闪电让位的宽度（压字时调大，如 28px；不压保持 0） */
+    --flash-text-space: 0px;
   }
 
   /* 关闭平台的大航海头像装饰框（.avatar-frame 是独立元素，直接隐藏） */
@@ -202,6 +210,31 @@
   .event--message .meta {
     margin-bottom: calc(var(--1px) * 2);  /* 名字与气泡的可见间距 */
   }
+
+  /* ==================== 气泡右上角闪电装饰 ====================
+     锚在事件容器（.event--message）右上角——不要锚 .meta：
+     平台自己控制 .meta 的定位，覆盖它的 position 会让参照系整个错位。
+     事件右缘≈气泡右缘；事件顶部是用户名行，气泡顶在其下约一行，
+     垂直位置用 --flash-top 微调（改了弹幕字号可能要重调）。
+     平台的 .event-list 带边缘遮罩，会裁掉探出气泡的装饰，需关闭 */
+  .event--message::after {
+    content: '';
+    position: absolute;
+    z-index: 4;
+    right: var(--flash-right);
+    top: var(--flash-top);
+    width: var(--flash-size);
+    height: var(--flash-size);
+    background: url('assets/blue-flash.png') center / contain no-repeat;
+    transform: rotate(var(--flash-rotate));
+    image-rendering: pixelated;
+    filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.18));
+    pointer-events: none;
+  }
+  .event-list {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
   /* 用户名：四向描边式阴影，保证浅色/复杂背景下的可读性
      （粗细调 --username-stroke-width，颜色调 --username-stroke，都在文件顶部变量区） */
   .event--message .username-text {
@@ -222,7 +255,8 @@
     box-sizing: border-box;
     width: calc(100% - 8px);         /* 气泡恒占满整行（扣除两侧 4px 边距），
                                         弹幕长短只影响气泡高度 */
-    padding: calc(var(--1px) * 6) calc(var(--1px) * 9);
+    padding: calc(var(--1px) * 6) calc(var(--1px) * 9 + var(--flash-text-space))
+             calc(var(--1px) * 6) calc(var(--1px) * 9);
     margin: 4px;            /* 给浮在外面的描边留位 */
     margin-bottom: 30px;    /* 给尾巴留位 */
 

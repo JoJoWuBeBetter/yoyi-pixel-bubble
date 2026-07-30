@@ -19,6 +19,7 @@
 - **大航海联动**：舰长蓝 / 提督紫 / 总督红描边，气泡、头像框、徽章同步变色
 - **底部锚定头像**：长弹幕撑开气泡时，头像始终与气泡底边、尾巴对齐
 - **入场动画**：左侧滑入 + 过冲回弹，弹幕流速过高时自动降级关闭
+- **闪电装饰**：气泡右上角像素闪电，可通过 CSS 变量调整大小、角度与位置
 - **深浅色双主题**：OBS 场景名加 `[dark]` 即切换深色配色
 - 仅定制弹幕事件（`.event--message`），SC / 礼物 / 上舰等事件保持平台默认样式
 
@@ -39,8 +40,8 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 复制 CSS 文件全文 → OBS 浏览器源 →「自定义 CSS」粘贴
 （此方式请先把文件中的 `@layer remote-css` 改为 `@layer custom-css`）
 
-> 大果版的槟榔徽章使用仓库内 `assets/` 图片；建议通过远程模版使用。
-> 若必须粘贴自定义 CSS，请将这三张图片发布到你自己可控的静态资源地址后，
+> 大果版的槟榔徽章与两版共用的闪电装饰均使用仓库内 `assets/` 图片；建议通过远程模版使用。
+> 若必须粘贴自定义 CSS，请将这些图片发布到你自己可控的静态资源地址后，
 > 再替换对应的 `--guard-nut` 路径。
 
 ### 建议配置
@@ -55,7 +56,7 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 ```text
 ├── yoyi-pixel-bubble.css              # 标准版
 ├── yoyi-pixel-bubble-areca-nut.css    # 大果版
-└── assets/                            # 图标素材（槟榔徽章等）
+└── assets/                            # 图标素材（槟榔徽章、闪电等）
 ```
 
 ## 技术说明
@@ -77,8 +78,8 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 ## 开发工具
 
 - 代码：**KIMI K3**（AI 辅助编写全部 CSS）
-- 图片：**OpenAI GPT Image 2**（槟榔徽章等图标素材生成）
+- 图片：**OpenAI GPT Image 2**（槟榔徽章、闪电等图标素材生成）
 
 ## License
 
-CSS 代码采用 Apache License 2.0。Fusion Pixel 字体与槟榔图标素材的授权请分别遵循其原始来源说明。
+CSS 代码采用 Apache License 2.0。Fusion Pixel 字体与槟榔、闪电图标素材的授权请分别遵循其原始来源说明。
