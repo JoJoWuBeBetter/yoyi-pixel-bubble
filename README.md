@@ -82,4 +82,4 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 
 ## License
 
-CSS 代码 MIT。Zpix 字体与槟榔图标素材的授权请分别遵循其原始来源说明。
+CSS 代码采用 Apache License 2.0。Zpix 字体与槟榔图标素材的授权请分别遵循其原始来源说明。
