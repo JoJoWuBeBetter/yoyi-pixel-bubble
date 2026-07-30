@@ -3,7 +3,7 @@
 [LAPLACE Chat](https://chat.laplace.live) 的 NES 复古游戏风弹幕皮肤（模版）。
 纯 CSS 实现，不包含任何 JavaScript，作为 OBS 浏览器源使用。
 
-![预览图](预览图链接)
+![预览图](预览图.png)
 
 ## 版本
 
