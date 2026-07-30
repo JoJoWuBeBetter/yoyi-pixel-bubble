@@ -2,8 +2,8 @@
   @title       又一像素气泡 大果版（yoyi-pixel-bubble-areca-nut）
   @author      周姓吴先生
   @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴，Zpix 中英像素字体，支持 [dark] 深色主题
-  @version     1.1.0
-  @updated     July 29, 2026
+  @version     1.1.1
+  @updated     July 30, 2026
   @features    dark-mode
 */
 
@@ -55,6 +55,10 @@
 
     /* 头像尺寸 */
     --avatar-size: 83px;
+    /* 头像与气泡之间的间距（调它就改这一个值，按预览实测微调） */
+    --avatar-gap: 20px;
+    /* 头像垂直位置（bottom 偏移：调小/负数 → 头像下移；调大 → 上移） */
+    --avatar-bottom: 5px;
 
     /* 大航海胶囊里槟榔图标的大小（胶囊高度不变，图标越大越饱满） */
     --guard-nut-size: 32px;
@@ -160,7 +164,7 @@
     position: relative;
     display: block;
     margin: calc(var(--1px) * 6) 0;
-    padding-left: calc(var(--avatar-size) + 16px);  /* 让出头像列 */
+    padding-left: calc(var(--avatar-size) + var(--avatar-gap));  /* 让出头像列 */
     min-height: calc(var(--avatar-size) + 34px);    /* 容纳底部锚定的头像 */
     font-family: 'Zpix', var(--font-sans);
     --event-font-family: 'Zpix', var(--font-sans);
@@ -171,7 +175,7 @@
   .event--message .avatar-wrap {
     position: absolute;
     left: 0;
-    bottom: 10px;                    /* 头像底边≈尾巴尖的高度（气泡底边在 30px 处） */
+    bottom: var(--avatar-bottom);    /* 垂直位置调文件顶部的 --avatar-bottom */
     width: var(--avatar-size);
     height: var(--avatar-size);
     margin: 8px;                     /* 给浮在外面的描边留位 */
