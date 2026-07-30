@@ -15,7 +15,7 @@
 ## 特性
 
 - **NES 风像素气泡**：阶梯角描边 + 阶梯小尾巴 + 硬投影，气泡恒占满行宽，弹幕长短只影响高度
-- **全像素字体**：Zpix 最像素，中文英文统一像素字形
+- **全像素字体**：Fusion Pixel 12px 比例版，支持简体中文、繁体中文、日文、韩文和拉丁文字形
 - **大航海联动**：舰长蓝 / 提督紫 / 总督红描边，气泡、头像框、徽章同步变色
 - **底部锚定头像**：长弹幕撑开气泡时，头像始终与气泡底边、尾巴对齐
 - **入场动画**：左侧滑入 + 过冲回弹，弹幕流速过高时自动降级关闭
@@ -46,7 +46,7 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 ### 建议配置
 
 - 配置器中开启「显示头像」（本皮肤布局依赖头像列）
-- 弹幕字号建议设为 **24**（Zpix 为 12px 网格设计，12 的倍数最清晰）
+- 弹幕字号建议设为 **24**（Fusion Pixel 为 12px 网格设计，2 倍缩放最清晰）
 - 使用 `[dark]` / `[scene:xxx]` 场景联动时，OBS 浏览器源需开启
   「用户信息的读取权限」
 
@@ -70,8 +70,7 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 ## 致谢与引用
 
 - [NES.css](https://github.com/nostalgic-css/NES.css)（MIT）— 像素边框实现方案
-- [Zpix 最像素](https://github.com/SolidZORO/zpix-pixel-font) — 中英像素字体
-  （个人使用免费，商用前请查阅其仓库授权说明）
+- [Fusion Pixel Font](https://github.com/TakWolf/fusion-pixel-font)（SIL OFL 1.1）— 泛中日韩像素字体
 - [LAPLACE Chat](https://chat.laplace.live) — 弹幕机平台
   （[模版开发文档](https://subspace.institute/docs/laplace-chat/templates)）
 
@@ -82,4 +81,4 @@ https://cdn.jsdelivr.net/gh/你的用户名/仓库名@main/yoyi-pixel-bubble.css
 
 ## License
 
-CSS 代码采用 Apache License 2.0。Zpix 字体与槟榔图标素材的授权请分别遵循其原始来源说明。
+CSS 代码采用 Apache License 2.0。Fusion Pixel 字体与槟榔图标素材的授权请分别遵循其原始来源说明。

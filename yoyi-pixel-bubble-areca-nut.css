@@ -1,19 +1,36 @@
 /*
   @title       又一像素气泡 大果版（yoyi-pixel-bubble-areca-nut）
   @author      周姓吴先生
-  @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴，Zpix 中英像素字体，支持 [dark] 深色主题
-  @version     1.1.1
+  @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴，Fusion Pixel 多语言像素字体，支持 [dark] 深色主题
+  @version     1.2.0
   @updated     July 30, 2026
   @features    dark-mode
 */
 
-/* ---------- 像素字体：Zpix 最像素（中文+英文全覆盖） ----------
-   通过 jsDelivr 从 GitHub 仓库 SolidZORO/zpix-pixel-font 拉取。
-   注意：Zpix 为 12px 网格设计，字号设为 12 的倍数（12/24/36）最清晰，
-   可在配置器里把弹幕字号调成 24。 */
+/* ---------- 像素字体：Fusion Pixel 12px 比例版（官方远程引用） ---------- */
 @font-face {
-  font-family: 'Zpix';
-  src: url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@master/dist/zpix.ttf') format('truetype');
+  font-family: 'Fusion Pixel Latin';
+  src: url('https://fusion-pixel-font.takwolf.com/fusion-pixel-12px-proportional-latin.otf.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fusion Pixel Hans';
+  src: url('https://fusion-pixel-font.takwolf.com/fusion-pixel-12px-proportional-zh_hans.otf.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fusion Pixel Hant';
+  src: url('https://fusion-pixel-font.takwolf.com/fusion-pixel-12px-proportional-zh_hant.otf.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fusion Pixel Japanese';
+  src: url('https://fusion-pixel-font.takwolf.com/fusion-pixel-12px-proportional-ja.otf.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fusion Pixel Korean';
+  src: url('https://fusion-pixel-font.takwolf.com/fusion-pixel-12px-proportional-ko.otf.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -166,8 +183,29 @@
     margin: calc(var(--1px) * 6) 0;
     padding-left: calc(var(--avatar-size) + var(--avatar-gap));  /* 让出头像列 */
     min-height: calc(var(--avatar-size) + 34px);    /* 容纳底部锚定的头像 */
-    font-family: 'Zpix', var(--font-sans);
-    --event-font-family: 'Zpix', var(--font-sans);
+    font-family: 'Fusion Pixel Hans', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+    --event-font-family: 'Fusion Pixel Hans', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+  }
+
+  /* 页面或消息带 lang 时，切换对应的地区字形。 */
+  :lang(zh-Hant) .event--message,
+  :lang(zh-TW) .event--message,
+  :lang(zh-HK) .event--message,
+  .event--message :lang(zh-Hant),
+  .event--message :lang(zh-TW),
+  .event--message :lang(zh-HK) {
+    font-family: 'Fusion Pixel Hant', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+    --event-font-family: 'Fusion Pixel Hant', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+  }
+  :lang(ja) .event--message,
+  .event--message :lang(ja) {
+    font-family: 'Fusion Pixel Japanese', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+    --event-font-family: 'Fusion Pixel Japanese', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+  }
+  :lang(ko) .event--message,
+  .event--message :lang(ko) {
+    font-family: 'Fusion Pixel Korean', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
+    --event-font-family: 'Fusion Pixel Korean', 'Fusion Pixel Latin', var(--font-sans), sans-serif;
   }
 
   /* 头像：锚定在事件【底部】，与气泡底边/尾巴始终同水平线
