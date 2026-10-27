@@ -2,8 +2,8 @@
   @title       又一像素气泡 大果版（yoyi-pixel-bubble-areca-nut）
   @author      周姓吴先生
   @description NES 风像素气泡弹幕皮肤 · 大果版：大航海身份徽章替换为槟榔胶囊（舰长=金/提督=银/总督=铜），阶梯角气泡 + 像素尾巴 + 闪电装饰，Fusion Pixel 多语言像素字体，支持 [dark] 深色主题
-  @version     1.3.0
-  @updated     July 30, 2026
+  @version     1.5.0
+  @updated     October 27, 2026
   @features    dark-mode
 */
 
@@ -351,14 +351,69 @@
     image-rendering: pixelated;
   }
 
+  /* 入场动画：头像先出现，气泡从尾巴尖撑开。 */
   .can-motion .event--message {
-    animation: pixel-slide-in 0.7s cubic-bezier(0.22, 1.6, 0.36, 1) both;
-    will-change: transform;
+    animation: none;
+    will-change: auto;
   }
 
-  @keyframes pixel-slide-in {
-    from { transform: translateX(-16px); }
-    to { transform: translateX(0); }
+  .can-motion .event--message > .avatar-wrap,
+  .can-motion .event--message > .meta > .avatar-wrap {
+    animation: yoyi-avatar-rise 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .can-motion .event--message > .message {
+    /* 尾巴伸出气泡底边 26px，缩放时让尖端留在原位。 */
+    transform-origin: 20px calc(100% + 26px);
+    animation: yoyi-bubble-pop 360ms 100ms both;
+  }
+
+  /* 头像位于 meta 内，不能缩放整个 meta，否则头像会跟着二次变形。 */
+  .can-motion .event--message > .meta > :not(.avatar-wrap) {
+    animation: yoyi-name-appear 160ms 100ms ease-out both;
+  }
+
+  .can-motion .event--message::after {
+    animation: yoyi-flash-appear 120ms 250ms ease-out both;
+  }
+
+  @keyframes yoyi-avatar-rise {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes yoyi-bubble-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.04);
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.025);
+      animation-timing-function: ease-out;
+    }
+    100% { opacity: 1; transform: none; }
+  }
+
+  @keyframes yoyi-name-appear {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes yoyi-flash-appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .can-motion .event--message > .avatar-wrap,
+    .can-motion .event--message > .meta > .avatar-wrap,
+    .can-motion .event--message > .message,
+    .can-motion .event--message > .meta > :not(.avatar-wrap),
+    .can-motion .event--message::after {
+      animation: none;
+    }
   }
 
   @container main (max-width: 300px) {
